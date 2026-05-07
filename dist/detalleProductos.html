@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Detalle</title>
+    <style>
+      .badge-stock { background: #e7f5ff; color: #0c5460; border: 1px solid #b3e5fc; border-radius: 20px; padding: 6px 12px; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+  <div class="container text-center" style="margin-top: 20px;">
+    <a class="navbar-brand" href="#">
+      <img src="/img/LogoCC.jpg" alt="Logo" style="height: 100px;"></a>
+  </div>
+
+  <div class="container-fluid" style="margin-top: 20px;">
+    <nav class="navbar navbar-expand-sm rounded navbar-borde mt-1 mb-1">
+      <div class="container-fluid justify-content-between align-items-center">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <img src="/img/menuuuu.png" alt="Menu" style="width: 30px; height: 30px;">
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="/">Home</a><li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/productos">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/nosotros">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/blogs">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contacto">Contacto</a>
+              </li>
+          </ul>
+        </div>
+        <div>
+          <ul class="navbar-nav  ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/carrito"><img src="/img/Carrito.png" alt="Carrito" style="width: 30px; height: 30px;">  Carrito (0)</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="container text-end">
+    <ul class="nav justify-content-end" style="margin-top: 10px;">
+      <li class="nav-item">
+        <a class="nav-link" href="/login"><small>Iniciar Sesión</small></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/register"><small>Registrarse</small></a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div class="row align-items-center" style="margin-top: 30px;">
+      <div class="col-6 d-flex flex-column align-items-center">
+        <div class="luxury-card d-flex align-items-center justify-content-center" style="width: 100%; height: 700px; border-radius: 10px; margin-bottom: 30px; position: relative; overflow: hidden; background: rgb(255, 253, 252);">
+          <img id="imagen" alt="" style="width: 100%px; height: 500px; object-fit: contain; border-radius: 10px; background: rgb(255, 253, 252); box-shadow: 0 4px 18px rgba(0,0,0,0.07);">
+        </div>
+      </div>
+      <div class="col-6 d-flex flex-column justify-content-center">
+        <div class="luxury-card" style="border-radius: 25px; padding: 35px; margin-bottom: 25px; min-height: 500px; display: flex; flex-direction: column;">
+          <div class="d-flex justify-content-between align-items-center">
+            <h1 id="nombre" class="luxury-title" style="padding: 20px; margin-bottom: 0; border-radius: 10px;"><small></small></h1>
+            <span id="stockBadge" class="badge-stock" style="display:none;">Stock</span>
+          </div>
+          <div class="text-center mb-4">
+            <span id="precio" class="luxury-price" style="padding: 15px 25px; border-radius: 25px; display: inline-block;"></span>
+          </div>
+          <div class="mb-4">
+            <strong style="color: #2c3e50; font-weight: 700; letter-spacing: 0.5px;">📝 Descripción del producto:</strong>
+          </div>
+          <div class="mb-4" style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); padding: 25px; border-radius: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); flex-grow: 1; text-align: justify;">
+            <span id="descripcion" style="color: #34495e; line-height: 1.6;"></span>
+          </div>
+
+          <div style="margin-top: auto;">
+            <div class="d-flex align-items-center justify-content-center my-4">
+              <div class="d-flex align-items-center" style="background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%); border-radius: 30px; padding: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 1px solid rgba(255, 255, 255, 0.2); gap: 8px;">
+                <button id="decrementar10" class="btn btn-outline-secondary" type="button" style="min-width: 64px; font-weight: 600;">-10</button>
+                <button id="decrementar" class="btn luxury-button rounded-circle" type="button" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem;">-</button>
+                <input id="cantidad" type="text" class="form-control mx-2 text-center border-0 bg-transparent fw-bold" value="1" style="width: 90px; font-size: 1.3rem; color: #2c3e50;" readonly>
+                <button id="incrementar" class="btn luxury-button rounded-circle" type="button" style="width: 45px; height: 45px; font-weight: bold; font-size: 1.2rem;">+</button>
+                <button id="incrementar10" class="btn btn-outline-secondary" type="button" style="min-width: 64px; font-weight: 600;">+10</button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-start" style="margin-top: 10px;">
+              <button id="agregarCarrito" class="btn luxury-primary-button" style="width: 100%; max-width: 100%; padding: 18px; border-radius: 10px;" onclick="agregarAlCarrito()">🛒 Agregar al carrito</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-auto" style="width: 100%; text-align: center; margin-top: 30px;">
+        <a href="/productos" class="btn luxury-button" style="padding: 15px 35px; border-radius: 10px; text-decoration: none;">← Volver a Productos</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/utils.js"></script>
+  <script src="/js/detalleProductos.js"></script>
+
+  <footer class="footer" style="margin-top: 40px;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-4 mb-3">
+          <div>
+            <h5 class="footer-title">Información</h5>
+            <hr>
+            <ul class="list-unstyled footer-list">
+              <li><a href="/condiciones">Centro de Ayuda</a></li>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div>
+            <h5 class="footer-title">Contacto</h5>
+            <hr>
+            <ul class="list-unstyled footer-list">
+              <li><strong>Tel:</strong> +56 9 9097 9356</li>
+              <li><strong>Email:</strong> clientes@colorcreativo.cl</li>
+              <li><a href="https://maps.app.goo.gl/mKFYFoK1RRAh1fNA9"><strong>Dirección:</strong> Miguel Pino Torres 7666, Cerrillos, Santiago</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 mb-3">
+          <div>
+            <h5 class="footer-title">Redes Sociales</h5>
+            <hr>
+            <ul class="list-unstyled footer-list">
+              <li><a href="https://www.instagram.com/colorcreativocl"><img src="/img/logoig2.png" alt="Instagram" style="width: 20px; height: 20px;"> colorcreativocl</a></li>
+              <li><a href="https://web.facebook.com/ColorCreativo/?locale=es_LA&_rdc=1&_rdr#"><img src="/img/logoface.png" alt="Facebook" style="width: 20px; height: 20px;"> Color Creativo</a></li>
+              <li><a href="https://wa.me/56990979356"><img src="/img/logowsp.png" alt="WhatsApp" style="width: 20px; height: 20px;"> Color Creativo</a></li>
+              <li><a href="https://www.tiktok.com/@colorcreativocl?_t=ZM-8zW3uMAYhrq&_r=1"><img src="/img/logotikitok.png" alt="TikTok" style="width: 20px; height: 20px;"> Color Creativo</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="text-center mb-3">
+          <p>&copy; 2025 Color Creativo</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

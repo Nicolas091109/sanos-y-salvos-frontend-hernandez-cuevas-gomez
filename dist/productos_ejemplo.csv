@@ -1,0 +1,4 @@
+nombre,precio,foto_url,descripcion,categoria_id,activo,stock
+Pantuflas c/ bolsa Reutilizable,12990,https://picsum.photos/id/10/600/400,Pantuflas cómodas con bolsa reutilizable,1,true,10
+Chapas Imán Destapador,4990,https://picsum.photos/id/20/600/400,Chapas personalizadas con imán y destapador,2,true,30
+Kit Anti Resaca,7990,https://picsum.photos/id/30/600/400,Kit pensado para el día después,3,true,15

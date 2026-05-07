@@ -1,0 +1,76 @@
+{
+  "productos":[
+    {
+      "nombre": "Pantuflas c/Bolsa Reutilizable",
+      "foto": "img/Pantuflas.jpg",
+      "precio": 3990,
+      "descripcion": "Sets de Pantuflas con Bolsa reutilizable y personalizadas, dos tallas standard a elección, talla mujer (núm. 37 al 39 aprox.) y talla hombre (núm. 40 al 42 aprox.) Bolsa tamaño 40x30x11 cms. Más de 70 diseños disponibles para elegir y personalizadas con nombres y fecha del matrimonio "
+    },
+    {
+      "nombre": "Pantuflas con Bolsa Plana",
+      "foto": "img/pantuflasbolsaplana.png",
+      "precio": 2690,
+      "descripcion": "Sets de Pantuflas con Bolsa Plana personalizadas, dos tallas a elección, talla mujer (num. 37 al 39 aprox.) y talla hombre (num. 40 al 42 aprox.) Bolsa tamaño 30x40 cms. Más de 70 diseños a elección y personalizados con nombre y fecha del matrimonio. "
+    },
+    {
+      "nombre": "Pantuflas con Bolsa Pequeña",
+      "foto": "img/pantuflabolsapequena.png",
+      "precio": 3690,
+      "descripcion": "Sets de Pantuflas con Bolsa Reutilizable Pequeña, dos tallas standard a elección, talla mujer (números 37 al 39 aprox.) y talla hombre (números 40 al 42 aprox.) Bolsa reutilizable tamaño 30x20x8 cms. con fuelle. Más de 70 diseños disponibles para elegir."
+    },
+    {
+      "nombre": "Chapas Imán Destapador 58mm",
+      "foto": "img/chapita.jpg",
+      "precio": 1290,
+      "descripcion": "Qué es lo más que hacemos durante los fines de semana? Beber. Refresco, cerveza, jugos; cualquier tipo de líquido es importante para mantenernos hidratados y contentos 😄 Es por eso que no debes dudar en regalar chapas destapador personalizadas en tu matrimonio "
+    },
+    {
+      "nombre": "Chapas con Llavero y destapador",
+      "foto": "img/chapallaverodestapador.png",
+      "precio": 290,
+      "descripcion": "Qué es lo más que hacemos durante los fines de semana? Beber. Refresco, cerveza, jugos; cualquier tipo de líquido es importante para mantenernos hidratados y contentos 😄 Es por eso que no debes dudar en regalar chapas destapador personalizadas en tu matri "
+    },
+    {
+    "nombre": "Chapas con Espejo",
+      "foto": "img/chapaespejo.png",
+      "precio": 1090,
+      "descripcion": "Espejo de bolsillo o cartera de 58 mm de diámetro"
+    },
+    {
+      "nombre": "Caja Almohada p/ Kit Anticaña",
+      "foto": "img/kitalmohada.png",
+      "precio": 990,
+      "descripcion": "Caja tamaño 12 cm. de largo x 11 cm. de ancho x 3 cms. de alto. No incluye el kit. 4 Diseños a elección"
+    },
+    {
+      "nombre": "Bolsa Reutilizable Pequeña",
+      "foto": "img/antiresacabolsa.png",
+      "precio": 1390,
+      "descripcion": "Bolsa reulizable pequeña con fuelle especial para armar tu kit antiresaca. Tamaño 20 cm de ancho x 30 cm de alto"
+    },
+    {
+      "nombre": "Kit Anti Resaca",
+      "foto": "img/KitAnti.jpg",
+      "precio": 1890,
+      "descripcion": "Para sobrevivir al día siguiente de la celebración. El kit incluye: - 1 Caja tipo almohada personalizada - 1 Sal de fruta - 1 Paracetamol - 1 Café - 1 Bolsa de té - 2 Dulces de menta / 4 diseños disponibles."
+    },
+    {
+      "nombre": "Calendario Magnético",
+      "foto": "img/calendariomagnetico.png",
+      "precio": 990,
+      "descripcion": "RCalendario magnético impreso full color y laminado, tamaño 7x15 cm. Calendario anual desde el mes del matrimonio."
+    },
+    {
+      "nombre": "Imanes",
+      "foto": "img/imanes.png",
+      "precio": 790,
+      "descripcion": "Imanes impreso full color y laminado, tamaño 9x6 cm "
+    },
+    {
+    "nombre": "Destapador Imantado",
+      "foto": "img/imantadodestapador.png",
+      "precio": 1890,
+      "descripcion": "Destapador imantado con forma de tapa. Tamaño 8 cm de diámetro. Disponible en color blanco invierno, rojo, amarillo, naranjo, azul y verde. "
+    } 
+  ]
+}
