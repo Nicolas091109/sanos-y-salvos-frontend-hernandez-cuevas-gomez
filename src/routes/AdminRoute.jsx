@@ -1,16 +1,17 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate, Outlet } from 'react-router-dom'
 import { getCurrentUser } from '../services/auth'
 
 export default function AdminRoute({ children }) {
   const currentUser = getCurrentUser()
+  const role = String(currentUser?.rol || currentUser?.role || '').toUpperCase()
 
   if (!currentUser) {
     return <Navigate to="/login" replace />
   }
 
-  if (currentUser.rol !== 'ADMIN') {
+  if (role !== 'ADMIN') {
     return <Navigate to="/" replace />
   }
 
-  return children
+  return children || <Outlet />
 }

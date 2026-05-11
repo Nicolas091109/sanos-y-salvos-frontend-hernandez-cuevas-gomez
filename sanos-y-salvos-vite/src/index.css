@@ -1,0 +1,48 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg: #07060a; /* negro profundo */
+  --card: #0f1724; /* azul gris oscuro */
+  --muted: #9aa0c1;
+  --text: #e9e6ff; /* tono lavanda claro */
+  --accent-1: #7c3aed; /* morado */
+  --accent-2: #8b5cf6; /* morado claro */
+}
+
+html, body, #root { height: 100%; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { max-width: 1100px; }
+
+/* Card component (replaces bg-white in markup) */
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background-color: var(--card);
+  color: var(--text);
+}
+
+/* Primary CTA button with purple gradient */
+.btn-cta {
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: white;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--accent-2);
+  background: transparent;
+}
+
+.text-muted { color: var(--muted); }
+
+.shadow { box-shadow: 0 6px 18px rgba(8,6,23,0.6); }
+
