@@ -1,0 +1,40 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-green: #2A7A5E;
+  --brand-green-dark: #1a6843;
+  --brand-green-light: #d4eddf;
+  --brand-amber: #f5c842;
+  --brand-amber-light: #fff4e0;
+  --brand-blue: #2462a8;
+  --brand-blue-light: #e4f0ff;
+}
+
+html, body, #root { 
+  height: 100%; 
+}
+
+body {
+  background-color: #ffffff;
+  color: #1f2937;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container { 
+  max-width: 1200px; 
+}
+
+/* Custom shadows for depth */
+.shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-xl {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
