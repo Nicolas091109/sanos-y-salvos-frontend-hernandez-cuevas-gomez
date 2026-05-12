@@ -1,28 +1,34 @@
-import api from './api'
+import { mockReports } from '../mock/mockData'
 
 export async function listReports(params = {}) {
-  // En producción usaría: return api.get('/reports', { params })
-  // Mientras tanto, será sobreescrito por mockData si se usa localmente.
-  const res = await api.get('/reports', { params })
-  return res.data
+  // Simular retraso de red opcional
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mockReports), 300);
+  });
 }
 
 export async function getReport(id) {
-  const res = await api.get(`/reports/${id}`)
-  return res.data
+  return new Promise((resolve) => {
+    const report = mockReports.find(r => String(r.id) === String(id));
+    setTimeout(() => resolve(report), 300);
+  });
 }
 
 export async function createReport(payload) {
-  const res = await api.post('/reports', payload)
-  return res.data
+  return new Promise((resolve) => {
+    const newReport = { ...payload, id: `r_${Date.now()}` };
+    setTimeout(() => resolve(newReport), 300);
+  });
 }
 
 export async function updateReport(id, payload) {
-  const res = await api.put(`/reports/${id}`, payload)
-  return res.data
+  return new Promise((resolve) => {
+    setTimeout(() => resolve({ ...payload, id }), 300);
+  });
 }
 
 export async function deleteReport(id) {
-  const res = await api.delete(`/reports/${id}`)
-  return res.data
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(true), 300);
+  });
 }
