@@ -4,7 +4,11 @@ import { useReports } from '../hooks/useReports'
 
 export default function ReportFound() {
   const { create } = useReports()
-  const [form, setForm] = useState(createPetReport('found'))
+  const [form, setForm] = useState(() => ({
+    ...createPetReport('found'),
+    lat: -33.445,
+    lng: -70.655,
+  }))
   const [submitting, setSubmitting] = useState(false)
 
   const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -18,8 +22,12 @@ export default function ReportFound() {
     setSubmitting(true)
     try {
       await create(form)
-      alert('Reporte de mascota encontrada creado localmente.')
-      setForm(createPetReport('found'))
+      alert('Reporte enviado correctamente al backend.')
+      setForm({
+        ...createPetReport('found'),
+        lat: -33.445,
+        lng: -70.655,
+      })
     } catch (err) { alert(err.message || 'Error al crear reporte') }
     setSubmitting(false)
   }
@@ -44,6 +52,10 @@ export default function ReportFound() {
         </div>
         <textarea name="description" placeholder="Descripción física" value={form.description} onChange={handleChange} className="p-2 border text-neutral-300 bg-transparent" />
         <input name="location" placeholder="Lugar donde fue encontrada" value={form.location} onChange={handleChange} required className="p-2 border bg-transparent text-neutral-300" />
+        <div className="grid grid-cols-2 gap-3">
+          <input name="lat" type="number" step="any" placeholder="Latitud" value={form.lat} onChange={handleChange} className="p-2 border" />
+          <input name="lng" type="number" step="any" placeholder="Longitud" value={form.lng} onChange={handleChange} className="p-2 border" />
+        </div>
         <div className="grid grid-cols-3 gap-3">
           <input name="ownerName" placeholder="Tu nombre" value={form.ownerName} onChange={handleChange} required className="p-2 border" />
           <input name="phone" placeholder="Teléfono" value={form.phone} onChange={handleChange} required className="p-2 border" />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { clearSession, getCurrentUser } from '../services/authService'
 
 export default function Navbar() {
   const location = useLocation();
@@ -8,12 +9,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const checkUser = () => {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      } else {
-        setUser(null);
-      }
+      setUser(getCurrentUser());
     };
 
     checkUser();
@@ -23,7 +19,7 @@ export default function Navbar() {
   }, [location]);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    clearSession();
     setUser(null);
     navigate('/login');
   };

@@ -11,11 +11,11 @@ import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { isAuthenticated } from './services/authService'
 
 // Componente para proteger rutas
 const PrivateRoute = ({ children }) => {
-  const user = localStorage.getItem('user');
-  return user ? children : <Navigate to="/login" replace />;
+  return isAuthenticated() ? children : <Navigate to="/login" replace />;
 };
 
 export default function App() {
@@ -24,9 +24,7 @@ export default function App() {
   const isLoginPage = location.pathname === '/login';
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    // Si no hay usuario y no estamos en login, redirigir a login
-    if (!user && !isLoginPage) {
+    if (!isAuthenticated() && !isLoginPage) {
       navigate('/login');
     }
   }, [location, navigate, isLoginPage]);
