@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { clearSession, getCurrentUser, login, register } from '../services/authService';
 
 export default function Login() {
   const [activeTab, setActiveTab] = useState('login');
@@ -15,54 +16,14 @@ export default function Login() {
   const [success, setSuccess] = useState('');
 
   useEffect(() => {
-    const user = localStorage.getItem('user');
+    const user = getCurrentUser();
     if (user) {
-      const parsedUser = JSON.parse(user);
       setIsLoggedIn(true);
-      setCurrentUser(parsedUser);
-    }
-
-    // Inicializar cuenta admin si no existe
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    let updated = false;
-
-    if (!users.find(u => u.email === 'admin@sanosysalvos.cl')) {
-      users.push({
-        email: 'admin@sanosysalvos.cl',
-        password: 'admin',
-        name: 'Administrador Principal',
-        role: 'ADMIN',
-        initial: 'AD'
-      });
-      updated = true;
-    }
-
-    if (!users.find(u => u.email === 'test@user.cl')) {
-      users.push({
-        email: 'test@user.cl',
-        password: '1234',
-        name: 'Usuario Demo',
-        role: 'USER',
-        initial: 'UD'
-      });
-      updated = true;
-    }
-
-    if (updated) {
-      localStorage.setItem('users', JSON.stringify(users));
+      setCurrentUser(user);
     }
   }, []);
 
-  const fillCredentials = (e, emailVal, passVal) => {
-    e.preventDefault();
-    setActiveTab('login');
-    setEmail(emailVal);
-    setPassword(passVal);
-    setError('');
-    setSuccess('');
-  };
-
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -72,52 +33,38 @@ export default function Login() {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    if (users.find(u => u.email === email)) {
-      setError('El correo ya está registrado');
-      return;
+    try {
+      await register({ email, password, name });
+      setSuccess('Cuenta creada con exito. Ahora puedes iniciar sesion.');
+      setActiveTab('login');
+      setEmail('');
+      setPassword('');
+      setName('');
+    } catch (err) {
+      setError(err.message || 'No fue posible registrar la cuenta');
     }
-
-    const newUser = {
-      email,
-      password,
-      name,
-      role: 'USER',
-      initial: name.substring(0, 2).toUpperCase()
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    setSuccess('Cuenta creada con éxito. ¡Ahora puedes iniciar sesión!');
-    setActiveTab('login');
-    // Limpiar campos
-    setEmail('');
-    setPassword('');
-    setName('');
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
-
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+    try {
+      const session = await login({ email, password }, 'local');
       setIsLoggedIn(true);
-      setCurrentUser(user);
+      setCurrentUser(session.user);
       navigate('/');
-    } else {
-      setError('Correo o contraseña incorrectos');
+    } catch (err) {
+      setError(err.message || 'Correo o contrasena incorrectos');
     }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
+    clearSession();
     setIsLoggedIn(false);
     setCurrentUser(null);
   };
+
+  const userInitial = currentUser?.name?.slice(0, 2)?.toUpperCase() || 'SS';
 
   const handleGoHome = () => {
     navigate('/');
@@ -187,30 +134,6 @@ export default function Login() {
             <p className="text-lg text-white/40 font-light leading-relaxed mb-10 max-w-md">
               Gestiona tus reportes, conecta con organizaciones y ayuda a que más mascotas vuelvan a casa.
             </p>
-            
-            <div className="flex flex-wrap gap-4">
-              <button 
-                onClick={(e) => fillCredentials(e, 'test@user.cl', '1234')}
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-2xl flex flex-col text-left hover:bg-white/10 hover:border-mint/30 transition-all group"
-              >
-                <div className="flex items-center gap-3 mb-1">
-                  <div className="w-2 h-2 bg-mint rounded-full group-hover:shadow-[0_0_8px_#5dca8e] transition-all"></div>
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">USER DEMO</span>
-                </div>
-                <span className="text-xs font-mono text-white/60">test@user.cl / 1234</span>
-              </button>
-              
-              <button 
-                onClick={(e) => fillCredentials(e, 'admin@sanosysalvos.cl', 'admin')}
-                className="bg-white/5 border border-white/10 px-4 py-3 rounded-2xl flex flex-col text-left hover:bg-white/10 hover:border-brand-amber/30 transition-all group"
-              >
-                <div className="flex items-center gap-3 mb-1">
-                  <div className="w-2 h-2 bg-brand-amber rounded-full group-hover:shadow-[0_0_8px_#f5c842] transition-all"></div>
-                  <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">ADMIN ROOT</span>
-                </div>
-                <span className="text-xs font-mono text-white/60">admin@sanosysalvos.cl / admin</span>
-              </button>
-            </div>
           </div>
 
           {/* Column Right: Session Panel */}
@@ -300,7 +223,7 @@ export default function Login() {
                   <div className="flex items-center justify-between mb-10 bg-white/5 p-4 rounded-2xl border border-white/5">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 bg-mint/10 border border-mint/20 rounded-full flex items-center justify-center text-mint font-bold text-lg">
-                        {currentUser?.initial}
+                        {userInitial}
                       </div>
                       <div>
                         <div className="font-bold text-white">{currentUser?.name}</div>

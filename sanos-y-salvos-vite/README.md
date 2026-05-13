@@ -1,39 +1,75 @@
-# Sanos y Salvos — Frontend (Vite + React)
+# Sanos y Salvos Vite App
 
-Proyecto frontend de ejemplo para localizar y recuperar mascotas perdidas.
+Aplicacion React del proyecto `Sanos y Salvos`. Este directorio contiene el frontend activo que consume el backend de microservicios a traves del gateway Spring.
 
-Características:
-- React 18 + Vite
-- Routing con React Router v6
-- Estilos con Tailwind CSS
-- Mapas con react-leaflet
-- Comunicación con backend vía Axios (punto base: `http://localhost:8080/api`)
+## Stack
 
-Estructura relevante:
-- `src/components/` — componentes reutilizables (Navbar, Footer, PetCard)
-- `src/pages/` — vistas (Home, ReportLost, ReportFound, ReportsList, PetDetail, MapView, Admin)
-- `src/services/` — API clients (api.js, reportService.js, petService.js)
-- `src/hooks/` — hooks personalizados (useReports)
-- `src/mock/` — datos mock para desarrollo local
+- React 18
+- Vite 5
+- React Router DOM
+- Axios
+- Tailwind CSS
+- React Leaflet
 
-Instalación y desarrollo:
+## Scripts
 
-```bash
-cd sanos-y-salvos-vite
+```powershell
 npm install
 npm run dev
+npm run build
+npm run preview
 ```
 
-Notas de diseño:
-- Patrón Repository: toda llamada a la API pasa por `src/services`.
-- Patrón Factory: `createPetReport(type)` crea objetos base para formularios.
-- Separación presentacional/containers: `PetCard` y formularios son presentacionales; la lógica de datos reside en `useReports`.
+## URL de desarrollo
 
-Agregar nuevas vistas:
-- Crear `src/pages/NuevaVista.jsx` y añadir ruta en `src/App.jsx`.
+- `http://localhost:5173`
 
-Publicación de módulos:
-- `package.json` está preparado parcialmente para publicar componentes; ajustar `files` y `main/module` según necesidad.
+## Backend esperado
 
-Mock assets:
-- Las imágenes de `mockData` hacen referencia a `/img/mock/*.jpg`. Añade imágenes en `public/img/mock/` o modifica las rutas.
+La aplicacion consume:
+
+- `http://localhost:8080/api`
+
+Servicios usados:
+
+- `/api/auth`
+- `/api/reportes`
+- `/api/geo`
+
+## Estructura relevante
+
+- `src/pages/`: pantallas principales
+- `src/components/`: componentes reutilizables
+- `src/services/api.js`: cliente Axios base
+- `src/services/authService.js`: login, registro y sesion
+- `src/services/geolocationService.js`: adaptadores de ubicacion
+- `src/services/reportService.js`: adaptadores y flujo de reportes
+- `src/hooks/useReports.js`: consumo de datos para reportes y mapa
+
+## Flujo principal
+
+1. El usuario se registra o inicia sesion.
+2. El token JWT se guarda en storage.
+3. Axios adjunta el token automaticamente.
+4. Al crear un reporte, primero se crea la ubicacion.
+5. Luego se crea el reporte con el `ubicacionId`.
+6. El listado y el mapa consumen datos reales.
+
+## Sesion
+
+- La app guarda `sys_token` y `user` en `localStorage` o `sessionStorage`.
+- El login visible usa cuentas reales; ya no hay botones de credenciales demo en la pantalla.
+
+## Validacion rapida
+
+```powershell
+npm run build
+```
+
+Si el build termina correctamente, la app queda lista para ejecutarse en desarrollo o previsualizacion.
+
+## Nota
+
+La documentacion general del repositorio frontend se encuentra en el `README.md` de la raiz:
+
+- `..\README.md`

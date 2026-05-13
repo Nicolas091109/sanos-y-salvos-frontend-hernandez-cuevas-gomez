@@ -4,7 +4,11 @@ import { useReports } from '../hooks/useReports'
 
 export default function ReportLost() {
   const { create } = useReports()
-  const [form, setForm] = useState(createPetReport('lost'))
+  const [form, setForm] = useState(() => ({
+    ...createPetReport('lost'),
+    lat: -33.445,
+    lng: -70.655,
+  }))
   const [submitting, setSubmitting] = useState(false)
 
   const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
@@ -19,8 +23,12 @@ export default function ReportLost() {
     setSubmitting(true)
     try {
       await create(form)
-      alert('Reporte creado localmente. En producción se enviaría al backend.')
-      setForm(createPetReport('lost'))
+      alert('Reporte enviado correctamente al backend.')
+      setForm({
+        ...createPetReport('lost'),
+        lat: -33.445,
+        lng: -70.655,
+      })
     } catch (err) { alert(err.message || 'Error al crear reporte') }
     setSubmitting(false)
   }
@@ -47,6 +55,10 @@ export default function ReportLost() {
         <div className="grid grid-cols-2 gap-3">
           <input name="date" type="date" value={form.date.split('T')[0]} onChange={(e)=>setForm(f=>({...f,date:e.target.value}))} className="p-2 border" />
           <input name="location" placeholder="Dirección aproximada" value={form.location} onChange={handleChange} required className="p-2 border" />
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <input name="lat" type="number" step="any" placeholder="Latitud" value={form.lat} onChange={handleChange} className="p-2 border" />
+          <input name="lng" type="number" step="any" placeholder="Longitud" value={form.lng} onChange={handleChange} className="p-2 border" />
         </div>
         <div className="grid grid-cols-3 gap-3">
           <input name="ownerName" placeholder="Nombre del dueño" value={form.ownerName} onChange={handleChange} required className="p-2 border bg-transparent text-neutral-300" />
